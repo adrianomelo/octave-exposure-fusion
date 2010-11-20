@@ -1,9 +1,9 @@
 
-i1 = imread("test1.jpg");
-i2 = imread("test2.jpg");
-i3 = imread("test3.jpg");
-i4 = imread("test4.jpg");
-i5 = imread("test5.jpg");
+i1 = imread("img/test1.jpg");
+i2 = imread("img/test2.jpg");
+i3 = imread("img/test3.jpg");
+i4 = imread("img/test4.jpg");
+i5 = imread("img/test5.jpg");
 
 imgs = zeros([size(i1), 5]);
 
