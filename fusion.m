@@ -1,6 +1,6 @@
 function IMG = fusion(imgs)
     printf('imagens: %d\n', size(imgs)(4));
-    IMG = contraste(imgs)
+    IMG = exposicao(imgs)
 endfunction
 
 function peso_contraste = contraste(imgs)
@@ -20,12 +20,14 @@ function peso = saturacao(imgs)
     peso = zeros(t(1), t(2), t(4));
 
     for i = 1:t(4)
+        img = imgs(:,:,:,i)
+        
         r = img(:,:,1)
         g = img(:,:,2)
         b = img(:,:,3)
-        media = (r + b +g)/3
+        media = (r + b + g) / 3.0
 
-        peso_img = ((r - media).^2 + (g - media).^2 + (r - media).^2) / 3;
+        peso_img = ((r - media).^2 + (g - media).^2 + (r - media).^2) / 3.;
         peso(:,:,i) = sqrt(peso_img);
     end
 endfunction
@@ -47,5 +49,4 @@ function peso = exposicao(imgs)
 
         peso(:,:,i) = peso_img;
     end
-
-endfunction
+end
