@@ -1,19 +1,24 @@
+imgs = 0
 
-i1 = imread("img/test1.jpg");
-i2 = imread("img/test2.jpg");
-i3 = imread("img/test3.jpg");
-i4 = imread("img/test4.jpg");
-i5 = imread("img/test5.jpg");
+pasta = "img/test1/";
+imagens = dir(pasta);
+qnt = size(imagens,1) - 2;
 
-imgs = zeros([size(i1), 5]);
+for i = 3:size(imagens, 1)
+    if 0 == imagens(i).isdir
+        printf('lendo imagem: %s\n', strcat(pasta, imagens(i).name));
 
-imgs(:,:,:,1) = i1;
-imgs(:,:,:,2) = i2;
-imgs(:,:,:,3) = i3;
-imgs(:,:,:,4) = i4;
-imgs(:,:,:,5) = i5;
+        img = imread(strcat(pasta, imagens(i).name));
 
-IMG = ef(imgs);
+        printf('tamanho da imagem %d vs %d\n', size(img)(1), size(img)(2));
+        
+        if imgs == 0
+            imgs = zeros(size(img)(1),size(img)(2), size(img)(3), qnt);
+        end
+        
+        imgs(:,:,:,i-2) = img;
+    end
+end
 
-imshow(IMG);
+img = fusion(imgs);
 

@@ -1,7 +1,6 @@
 function IMG = fusion(imgs)
-    printf("imagens: '%d'", size(imgs)(4));
-
-    IMG = imgs(:,:,:,1)
+    printf('imagens: %d\n', size(imgs)(4));
+    IMG = contraste(imgs)
 endfunction
 
 function peso_contraste = contraste(imgs)
@@ -12,8 +11,9 @@ function peso_contraste = contraste(imgs)
 
     for i = 1:t(4)
         img_cinza = rgb2gray(imgs(:,:,:,i));
-        peso_contraste = abs(imfilter(img_cinza, laplaciano,'replicate');
-endfunction
+        peso_contraste = abs(imfilter(img_cinza, laplaciano,'replicate'));
+    end         
+end
 
 function peso = saturacao(imgs)
     t = size(imgs);
