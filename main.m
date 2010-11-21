@@ -2,7 +2,7 @@ function img = main()
     
     imgs = 0
 
-    pasta = "img/test1/";
+    pasta = "img/test2/";
     imagens = dir(pasta);
     qnt = size(imagens,1) - 2;
 

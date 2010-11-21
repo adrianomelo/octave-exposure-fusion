@@ -1,7 +1,7 @@
 function IMG = fusion(imgs)
     printf('imagens: %d\n', size(imgs)(4));
-    IMG = exposicao(imgs)
-endfunction
+    IMG = saturacao(imgs)
+end
 
 function peso_contraste = contraste(imgs)
     laplaciano = [0 1 0; 1 -4 1; 0 1 0];
