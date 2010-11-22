@@ -50,3 +50,13 @@ function peso = exposicao(imgs)
         peso(:,:,i) = peso_img;
     end
 end
+
+function M = piramide_laplaciana(img)
+    % 1 - Compute a reduced-resolution approximation of the input image.
+
+    
+
+
+end
+
+
