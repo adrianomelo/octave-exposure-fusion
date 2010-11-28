@@ -1,8 +1,27 @@
-function [CNT, SAT, EXP] = fusion(imgs)
+function [CNT, SAT, EXP, HDR] = fusion(imgs)
     printf('imagens: %d\n', size(imgs)(4));
-    CNT = contraste(imgs)
-    SAT = saturacao(imgs)
-    EXP = exposicao(imgs)
+    CNT = contraste(imgs);
+    SAT = saturacao(imgs);
+    EXP = exposicao(imgs);
+   
+    pesos = CNT.*SAT.*EXP;
+
+    % normalização
+    %soma_pesos = sum(pesos, 3);
+    %for i = 1:size(pesos)(3)
+    %    soma_pesos = soma_pesos + 0.00000001;
+    %    pesos(:,:,i) = pesos(:,:,i)./soma_pesos;
+    %end
+
+    HDR = normalizar(pesos);
+end
+
+function matriz = normalizar(matriz)
+    soma = sum(matriz, 3);
+    for i = 1:size(matriz)(3)
+        soma = soma + 0.000000001;
+        matriz(:,:,i) = matriz(:,:,i)./soma;
+    end
 end
 
 function peso = contraste(imgs)
@@ -13,8 +32,9 @@ function peso = contraste(imgs)
 
     for i = 1:t(4)
         img_cinza = rgb2gray(imgs(:,:,:,i));
-        peso_contraste = abs(imfilter(img_cinza, laplaciano,'replicate'));
-	peso(:,:,i) = peso_contraste
+        peso(:,:,i) = abs(imfilter(img_cinza, laplaciano,'replicate'));
+	    
+        %peso(:,:,i) = peso_contraste
     end         
 end
 

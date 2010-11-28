@@ -1,10 +1,11 @@
 function img = main()
 
-    pasta = "img/test2/";
+    pasta = "img/test6/";
     imagens = dir(pasta);
     qnt = size(imagens,1) - 2;
     
-    imgs = zeros(480,640,3, qnt);
+    %imgs = zeros(480,640,3, qnt);
+    imgs = zeros(800,1200,3, qnt);
 
     for i = 3:size(imagens, 1)
         if 0 == imagens(i).isdir
@@ -15,26 +16,30 @@ function img = main()
             printf('tamanho da imagem %d vs %d\n', size(img)(1), size(img)(2));
         
             %if imgs == 0
-            %    imgs = zeros(size(img)(1),size(img)(2), size(img)(3), qnt);
+            %    imgs = zeros(size(img)(1),size(img2), size(img)(3), qnt);
             %end
             
             imgs(:,:,:,i-2) = double(img) / 255;
         end
     end
 
-    [cnt, sat, Exp] = fusion(imgs);
-    
-    for i = 1:qnt
-        subplot(2,2,1);
-        imshow(cnt(:,:,i));
-        subplot(2,2,2);
-        imshow(sat(:,:,i));
-        subplot(2,2,3);
-        imshow(Exp(:,:,i));
-        subplot(2,2,4);
-        imshow(imgs(:,:,:,i));
+    [cnt, sat, Exp, hdr] = fusion(imgs);
+ 
+    imshow(hdr(:,:,1));
 
-        nome = strcat('img', int2str(i), '.jpg')
-        print(nome, '-djpg')
-    end
+%    for i = 1:qnt
+%        subplot(2,2,1);
+%        imshow(cnt(:,:,i));
+%        subplot(2,2,2);
+%        imshow(sat(:,:,i));
+%        subplot(2,2,3);
+%        imshow(Exp(:,:,i));
+%        subplot(2,2,4);
+%        imshow(imgs(:,:,:,i));
+%
+%        nome = strcat('img', int2str(i), '.jpg')
+%        print(nome, '-djpg')
+%
+%        imshow(hdr(:,:,1))
+%    end
 end
