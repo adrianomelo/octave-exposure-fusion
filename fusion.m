@@ -1,20 +1,24 @@
-function IMG = fusion(imgs)
+function [CNT, SAT, EXP] = fusion(imgs)
     printf('imagens: %d\n', size(imgs)(4));
-    IMG = saturacao(imgs)
+    CNT = contraste(imgs)
+    SAT = saturacao(imgs)
+    EXP = exposicao(imgs)
 end
 
-function peso_contraste = contraste(imgs)
+function peso = contraste(imgs)
     laplaciano = [0 1 0; 1 -4 1; 0 1 0];
 
     t = size(imgs);
-    peso_contraste = zeros(t(1), t(2), t(4));
+    peso = zeros(t(1), t(2), t(4));
 
     for i = 1:t(4)
         img_cinza = rgb2gray(imgs(:,:,:,i));
         peso_contraste = abs(imfilter(img_cinza, laplaciano,'replicate'));
+	peso(:,:,i) = peso_contraste
     end         
 end
 
+% Para cada imagem, 
 function peso = saturacao(imgs)
     t = size(imgs);
     peso = zeros(t(1), t(2), t(4));
