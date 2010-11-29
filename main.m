@@ -1,4 +1,4 @@
-function img = main()
+function hdr = main()
 
     conjunto = 'test2';
     pasta = strcat("img/", conjunto, "/");
@@ -25,7 +25,7 @@ function img = main()
     end
 
     [cnt, sat, Exp, pesos, hdr] = fusion(imgs);
- 
+
     imshow(hdr);
     nome = strcat('img-geradas/', conjunto, '/resultado.jpg');
     print(nome, '-djpg');
