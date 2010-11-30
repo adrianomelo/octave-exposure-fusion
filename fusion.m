@@ -1,12 +1,16 @@
 function [CNT, SAT, EXP, pesos, HDR] = fusion(imgs)
     tam = size(imgs);
 
-    printf('imagens: %d\n', tam(4));
-    CNT = contraste(imgs);
-    SAT = saturacao(imgs);
-    EXP = exposicao(imgs);
-   
-    pesos = double(CNT).*double(SAT).*double(EXP);
+    wc = 1;
+    ws = 1;
+    we = 1;
+
+    CNT = contraste(imgs).^wc;
+    SAT = saturacao(imgs).^ws;
+    EXP = exposicao(imgs).^we;
+  
+    pesos = ones(size(CNT));
+    pesos = pesos.*CNT.*SAT.*EXP;
 
     % normalização
     %soma_pesos = sum(pesos, 3);
@@ -70,7 +74,7 @@ end
 function matriz = normalizar(matriz)
     soma = sum(matriz, 3);
     for i = 1:size(matriz)(3)
-        %soma = soma + 0.000000000000001;
+        matriz(:,:,i) = matriz(:,:,i) + 0.000000001;
         matriz(:,:,i) = matriz(:,:,i)./soma;
     end
 end
